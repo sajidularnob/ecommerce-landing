@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" x-data="ecommerceDemo()" :class="dark?'dark':''">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ByteVibe - Checkout</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="script.js"></script>
+<style>#fly-cart{position:fixed;z-index:9999;width:50px;height:50px;pointer-events:none;transition:all 0.7s ease;display:none;}</style>
+</head>
+<body x-init="updateTotal()">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+<div class="container">
+  <a class="navbar-brand fw-bold" href="index.html">ByteVibe</a>
+  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto gap-3 align-items-center">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+      <li class="nav-item position-relative">
+        <a id="cart-icon" class="nav-link" href="#" @click.prevent="toggleCart()">Cart <span class="badge bg-danger" x-text="cart.length"></span></a>
+      </li>
+      <li class="nav-item">
+        <button @click="dark=!dark" class="btn btn-outline-secondary"> <span x-show="!dark">🌙</span> <span x-show="dark">☀️</span> </button>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+<!-- Checkout Form -->
+<section class="container py-5 mt-5">
+  <h3>Checkout</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <h5 class="mb-3">Shipping Information</h5>
+      <form @submit.prevent="placeOrder()">
+        <div class="mb-3"><input type="text" class="form-control" placeholder="Full Name" x-model="customer.name" required></div>
+        <div class="mb-3"><input type="text" class="form-control" placeholder="Address" x-model="customer.address" required></div>
+        <div class="mb-3"><input type="tel" class="form-control" placeholder="Phone" x-model="customer.phone" required></div>
+        <div class="mb-3"><input type="email" class="form-control" placeholder="Email" x-model="customer.email" required></div>
+        <button class="btn btn-success w-100">Place Order</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <h5 class="mb-3">Order Summary</h5>
+      <template x-if="cart.length===0"><p>Cart is empty</p></template>
+      <template x-for="item in cart" :key="item.id">
+        <div class="d-flex justify-content-between mb-2">
+          <p class="mb-0" x-text="item.name + ' x ' + (item.qty||1)"></p>
+          <p class="mb-0 text-danger fw-bold">৳<span x-text="(item.qty*item.price).toFixed(2)"></span></p>
+        </div>
+      </template>
+      <div class="border-top pt-2 mt-2">
+        <p class="fw-bold">Total: ৳<span x-text="total"></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<img id="fly-cart" src="" alt="Flying Cart">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

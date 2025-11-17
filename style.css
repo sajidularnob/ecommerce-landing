@@ -1,0 +1,108 @@
+/* screen dim */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 900;
+}
+#overlay.show {
+  display: block;
+}
+
+/* Mini Cart Slide Panel */
+#mini-cart {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 350px;
+  background: white;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+
+  /* Hidden by default */
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* slide in */
+#mini-cart.show {
+  transform: translateX(0);
+}
+
+/* dark mode support */
+#mini-cart.dark {
+  background: #1a1a1a;
+  color: white;
+}
+#mini-cart.dark p,
+#mini-cart.dark small {
+  color: white;
+}
+
+/* fly cart */
+#fly-cart {
+  position: fixed;
+  z-index: 9999;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  transition: all 0.7s ease;
+  display: none;
+}
+/* Global Dark Mode */
+.dark body {
+  background: #121212;
+  color: #e8e8e8;
+}
+
+/* Navbar */
+.dark .navbar {
+  background: #1a1a1a !important;
+  border-bottom: 1px solid #333;
+}
+.dark .nav-link {
+  color: #e8e8e8 !important;
+}
+
+/* Cards */
+.dark .card {
+  background: #1a1a1a;
+  color: #e8e8e8;
+  border-color: #333;
+}
+.dark .card-body p,
+.dark .card-title {
+  color: #e8e8e8 !important;
+}
+
+/* Product Titles & Price */
+.dark .text-danger {
+  color: #ff7070 !important;
+}
+
+/* Background sections */
+.dark section {
+  background: #121212;
+}
+
+/* Overlay stays same */
+.dark #overlay {
+  background: rgba(0,0,0,0.6);
+}
+
+/* Buttons */
+.dark .btn-outline-secondary {
+  color: white;
+  border-color: white;
+}
+.dark .btn-outline-secondary:hover {
+  background: white;
+  color: #121212;
+}
